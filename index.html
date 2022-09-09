@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>垃圾分类作业监管平台</title>
+    <link rel="stylesheet" href="css/element.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="flex-center-center">
+        <div class="time">
+          <span>实时数据</span>
+          <span id="dateDiv"></span>
+          <span id="timeDiv"></span>
+          <span></span>
+        </div>
+        <img src="img/header01.png" alt="" />
+        <p>垃圾分类作业监管平台</p>
+        <img src="img/header02.png" alt="" />
+      </header>
+      <div class="main">
+        <div class="three flex">
+          <section class="left">
+            <div class="item item01 flex-center-center" @click="maskShow=true">
+              <el-select v-model="value1" size="small" placeholder="请选择">
+                <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <el-select v-model="value2" size="small" placeholder="请选择">
+                <el-option
+                  v-for="item in options2"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <el-select v-model="value3" size="small" placeholder="请选择">
+                <el-option
+                  v-for="item in options3"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <el-select
+                v-model="value4"
+                size="small"
+                placeholder="请选择"
+                @focus="maskShow=true"
+              >
+                <el-option
+                  v-for="item in options4"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="item item02">
+              <div class="flex-center-center">
+                <img src="img/line01.png" alt="" />
+                <p class="title">用户统计</p>
+                <img src="img/line02.png" alt="" />
+              </div>
+              <div class="flex-wrap user">
+                <div class="v">
+                  <p>123</p>
+                  <p>用户总量</p>
+                  <p>(户)</p>
+                  <img src="img/user01.png" alt="" />
+                </div>
+                <div class="v">
+                  <p>123</p>
+                  <p>参与总量</p>
+                  <p>(户)</p>
+                  <img src="img/user02.png" alt="" />
+                </div>
+                <div class="v">
+                  <p>123</p>
+                  <p>新增总量</p>
+                  <p>(户)</p>
+                  <img src="img/user03.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="item item03">
+              <div class="flex-center-center">
+                <img src="img/line01.png" alt="" />
+                <p class="title">清运车辆统计</p>
+                <img src="img/line02.png" alt="" />
+              </div>
+              <div class="flex-wrap car">
+                <section class="v flex-center">
+                  <div class="bg flex-center-center">
+                    <img src="img/car01.png" alt="" />
+                  </div>
+                  <div>
+                    <p class="num">0<span>辆</span></p>
+                    <p class="txt">厨余垃圾清运车</p>
+                  </div>
+                </section>
+                <section class="v flex-center">
+                  <div class="bg flex-center-center">
+                    <img src="img/car02.png" alt="" />
+                  </div>
+                  <div>
+                    <p class="num">0<span>辆</span></p>
+                    <p class="txt">可回收物清运车</p>
+                  </div>
+                </section>
+                <section class="v flex-center">
+                  <div class="bg flex-center-center">
+                    <img src="img/car03.png" alt="" />
+                  </div>
+                  <div>
+                    <p class="num">0<span>辆</span></p>
+                    <p class="txt">有害垃圾清运车</p>
+                  </div>
+                </section>
+                <section class="v flex-center">
+                  <div class="bg flex-center-center">
+                    <img src="img/car04.png" alt="" />
+                  </div>
+                  <div>
+                    <p class="num">0<span>辆</span></p>
+                    <p class="txt">其他垃圾清运车</p>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </section>
+          <section class="center">
+            <div style="height: 31%; display: flex; flex-direction: column">
+              <div class="flex-between" style="align-items: flex-end">
+                <div class="flex-between" style="width: 90%">
+                  <el-select v-model="value1" size="small" placeholder="请选择">
+                    <el-option
+                      v-for="item in options1"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
+		
+                  <div class="num flex-center-center">5</div>
+                  <div class="num flex-center-center">2</div>
+                  <div class="num flex-center-center">3</div>
+                  <div class="num flex-center-center">1</div>
+                  <div class="num flex-center-center">1</div>
+                </div>
+                <div class="dw">kg</div>
+              </div>
+              <div class="flex-between allNum">
+                <div class="v flex-center-center">
+                  <div>
+                    <p>小区数量</p>
+                    <p>
+                      <count-to
+                        class="dh"
+                        :start-val="startVal"
+                        :end-val="endVal"
+                        :duration="2000"
+                        separator=""
+                      ></count-to>
+                      <span>个</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="v flex-center-center">
+                  <div>
+                    <p>收集点数量</p>
+                    <p>
+                      <count-to
+                        class="dh"
+                        :start-val="startVal"
+                        :end-val="endVal"
+                        :duration="2000"
+                        separator=""
+                      ></count-to>
+                      <span>个</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="v flex-center-center">
+                  <div>
+                    <p>投放人次</p>
+                    <p>
+                      <count-to
+                        class="dh"
+                        :start-val="startVal"
+                        :end-val="endVal"
+                        :duration="2000"
+                        separator=""
+                      ></count-to>
+                      <span>人</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="v flex-center-center">
+                  <div>
+                    <p>AI识别次数</p>
+                    <p>
+                      <count-to
+                        class="dh"
+                        :start-val="startVal"
+                        :end-val="endVal"
+                        :duration="2000"
+                        separator=""
+                      ></count-to>
+                      <span>人</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="middle">
+              <div class="flex-center-center">
+                <img src="img/line01.png" alt="" />
+                <p class="title">业务数据统计</p>
+                <img src="img/line02.png" alt="" />
+              </div>
+              <div id="middle_echart" style="width: 100%; height: 50%"></div>
+              <div class="flex-between" style="width: 100%; height: 50%">
+                <section class="zb" style="width: 60%">
+                  <div class="flex-center" style="margin-bottom: 10px">
+                    <p class="l"></p>
+                    <p class="txt">垃圾数量占比</p>
+                  </div>
+                  <div class="flex-wrap">
+                    <div class="v flex-between">
+                      <p>厨余垃圾数量</p>
+                      <p class="green">4621.56kg</p>
+                      <p class="green">39%</p>
+                    </div>
+                    <div class="v flex-between">
+                      <p>其他垃圾数量</p>
+                      <p class="grey">4621.56kg</p>
+                      <p class="grey">39%</p>
+                    </div>
+                    <div class="v flex-between">
+                      <p>可回收物数量</p>
+                      <p class="blue">4621.56kg</p>
+                      <p class="blue">39%</p>
+                    </div>
+                    <div class="v flex-between">
+                      <p>有害垃圾数量</p>
+                      <p class="red">4621.56kg</p>
+                      <p class="red">39%</p>
+                    </div>
+                  </div>
+                </section>
+                <section
+                  id="mg_echart"
+                  style="width: 40%; height: 100%; top: -20px; left: -50px"
+                ></section>
+              </div>
+            </div>
+          </section>
+          <section class="right">
+            <div class="item item01">
+              <div class="flex-center-center">
+                <img src="img/line01.png" alt="" />
+                <p class="title">行为引导有效率统计</p>
+                <img src="img/line02.png" alt="" />
+              </div>
+              <div id="bing_echart" style="width: 100%; height: 90%"></div>
+            </div>
+            <div class="item item02">
+              <div class="flex-center-center">
+                <img src="img/line01.png" alt="" />
+                <p class="title">小区准确率排名</p>
+                <img src="img/line02.png" alt="" />
+              </div>
+              <div class="table">
+                <div class="flex-center-center name v">
+                  <p>排名</p>
+                  <p>小区名称</p>
+                  <p>准确率</p>
+                  <p>状态</p>
+                </div>
+                <div class="flex-center-center v">
+                  <p>1</p>
+                  <p class="ellipsis01">工商莲湖分局</p>
+                  <p>100%</p>
+                  <p><img src="img/shang.png" alt="" /></p>
+                </div>
+                <div class="flex-center-center v">
+                  <p>2</p>
+                  <p class="ellipsis01">工商莲湖分局</p>
+                  <p>100%</p>
+                  <p><img src="img/xia.png" alt="" /></p>
+                </div>
+                <div class="flex-center-center v">
+                  <p>3</p>
+                  <p class="ellipsis01">工商莲湖分局</p>
+                  <p>100%</p>
+                  <p><img src="img/shang.png" alt="" /></p>
+                </div>
+                <div class="flex-center-center v">
+                  <p>4</p>
+                  <p class="ellipsis01">工商莲湖分局</p>
+                  <p>100%</p>
+                  <p><img src="img/xia.png" alt="" /></p>
+                </div>
+                <div class="flex-center-center v">
+                  <p>5</p>
+                  <p class="ellipsis01">工商莲湖分局</p>
+                  <p>100%</p>
+                  <p><img src="img/shang.png" alt="" /></p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="db flex">
+          <section class="left">
+            <div class="flex-center-center">
+              <img src="img/line01.png" alt="" />
+              <p class="title">实时投放记录</p>
+              <img src="img/line02.png" alt="" />
+            </div>
+
+            <div class="table">
+              <div class="flex-center-center name v">
+                <p>时间</p>
+                <p>点位</p>
+                <p>垃圾类型</p>
+                <p>重量/数量</p>
+                <p>数据来源</p>
+              </div>
+              <vue-seamless-scroll
+                :data="listData"
+                :class-option="seamlessScrollOption"
+                style="
+                  height: 200px;
+                  overflow: hidden;
+                  color: white;
+                  font-size: 18px;
+                  text-align: center;
+                "
+              >
+                <div
+                  class="flex-center-center v"
+                  v-for="(item, index) in listData"
+                  :key="index"
+                >
+                  <p class="blue">{{ item.time }}</p>
+                  <p class="green ellipsis01">{{ item.name }}</p>
+                  <p class="blue">{{ item.type }}</p>
+                  <p class="green">{{ item.num }}公斤</p>
+                  <p class="blue">{{ item.from }}</p>
+                </div>
+              </vue-seamless-scroll>
+            </div>
+          </section>
+          <section class="center">
+            <div class="flex-center-center">
+              <img src="img/line01.png" alt="" />
+              <p class="title">厨余垃圾投放准确率</p>
+              <img src="img/line02.png" alt="" />
+            </div>
+            <div id="shuiwen_echart" style="width: 100%; height: 87%"></div>
+          </section>
+          <section class="right">
+            <div class="flex-center-center">
+              <img src="img/line01.png" alt="" />
+              <p class="title">数字化引导记录</p>
+			  
+              <img src="img/line02.png" alt="" />
+            </div>
+			<div id="btn-select">
+				<button type="button">疑似混投</button>
+				<button type="button">厨余违规</button>
+			</div>
+            <!-- <div class="flex-center btn">
+              <p>疑似混投</p>
+              <p>厨余违规</p>
+            </div> -->
+            <div class="table">
+              <div class="flex-center-center name v">
+                <p>时间</p>
+                <p>用户</p>
+                <p>分类主体</p>
+                <p>违规行为</p>
+                <p>引导措施</p>
+              </div>
+              <vue-seamless-scroll
+                :data="listData"
+                :class-option="seamlessScrollOption"
+                style="
+                  height: 200px;
+                  overflow: hidden;
+                  color: white;
+                  font-size: 18px;
+                  text-align: center;
+                "
+              >
+                <div
+                  class="flex-center-center v"
+                  v-for="(item, index) in listData"
+                  :key="index"
+                >
+                  <p class="blue">{{ item.time }}</p>
+                  <p class="green ellipsis01">{{ item.name }}</p>
+                  <p class="blue">{{ item.type }}</p>
+                  <p class="green">{{ item.num }}</p>
+                  <p class="blue">{{ item.from }}</p>
+                </div>
+              </vue-seamless-scroll>
+              <!-- <div class="flex-center-center v">
+                <p class="blue">2022-8-9 16:30:43</p>
+                <p class="green ellipsis01">0001-00083</p>
+                <p class="blue ellipsis01">工商莲湖分局</p>
+                <p class="green">厨余混投</p>
+                <p class="blue">短信提醒</p>
+              </div> -->
+            </div>
+          </section>
+        </div>
+      </div>
+      <!-- 弹窗 -->
+      <div class="mask flex-center-center" v-if="maskShow">
+        <div class="big">
+          <el-select v-model="value3" size="small" placeholder="请选择">
+            <el-option
+              v-for="item in options3"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <el-select v-model="value4" size="small" placeholder="请选择">
+            <el-option
+              v-for="item in options4"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <el-select v-model="value3" size="small" placeholder="请选择">
+            <el-option
+              v-for="item in options3"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <el-select v-model="value4" size="small" placeholder="请选择">
+            <el-option
+              v-for="item in options4"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <el-select v-model="value3" size="small" placeholder="请选择">
+            <el-option
+              v-for="item in options3"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <div class="submit" @click="maskShow=false">确认</div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	<script src="js/index.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/vue-count-to.min.js"></script>
+    <script type="text/javascript" src="js/vue-seamless-scroll.js"></script>
+    <script src="js/element.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            maskShow: false,
+            startVal: 0,
+            endVal: 20225,
+            options1: [
+              {
+                value: "1",
+                label: "回收总量",
+              },
+            ],
+            value1: "回收总量",
+            options2: [
+              {
+                value: "1",
+                label: "1月",
+              },
+            ],
+            value2: "1月",
+            options3: [
+              {
+                value: "1",
+                label: "西安市",
+              },
+            ],
+            value3: "西安市",
+            options4: [
+              {
+                value: "1",
+                label: "莲湖区",
+              },
+            ],
+            value4: "莲湖区",
+            listData: [
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+              {
+                time: "2022-8-9 16:30:43",
+                name: "工商莲湖分局",
+                type: "其他垃圾",
+                num: "0.2公斤",
+                from: "0001-00083",
+              },
+            ],
+          };
+        },
+        computed: {
+          seamlessScrollOption() {
+            return {
+              step: 0.4, // 数值越大速度滚动越快
+              limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+              hoverStop: true, // 是否开启鼠标悬停stop
+              direction: 1, // 0向下 1向上 2向左 3向右
+              openWatch: true, // 开启数据实时监控刷新dom
+              singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+              singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+              waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+            };
+          },
+        },
+      });
+      var myCharts = [];
+      // =========================业务数据统计=========================
+      var middle_echart = echarts.init(
+        document.getElementById("middle_echart")
+      );
+      const charts = {
+        title: "",
+        unit: "单位:kg",
+        names: ["有害垃圾", "厨余垃圾", "可回收物", "其他垃圾"],
+        lineX: ["8/1", "8/5", "8/10", "8/15", "8/20", "8/25", "8/30"],
+        value: [
+          [100, 24.1, 37.2, 315.5, 242.4, 642.4, 42.4],
+          [52, 24.1, 7.2, 15.5, 42.4, 42.4, 42.4],
+          [30, 20.1, 30.4, 65.1, 153.3, 110.3, 53.3],
+          [200, 24.1, 27.2, 315.5, 42.4, 412.4, 42.4],
+        ],
+      };
+      const color = ["#CD2F65", "#04CB5C", "#25A1E5", "#C7C7C7"];
+      const lineY = [];
+      for (var i = 0; i < charts.names.length; i++) {
+        const x = i;
+        const data = {
+          name: charts.names[i],
+          type: "line",
+          color: color[x],
+          smooth: true, //曲线或者折线
+          symbol: "circle",
+          symbolSize: 6,
+          data: charts.value[i],
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: color[x] + "b3" },
+              { offset: 1, color: color[x] + "03" },
+            ]),
+          },
+        };
+        lineY.push(data);
+      }
+      const middle_option = {
+        backgroundColor: "",
+        title: {
+          text: charts.title,
+          x: "left",
+          textStyle: { fontSize: "15", color: "#303133" },
+        },
+        grid: {
+          top: "30%",
+          right: "5%",
+          bottom: 0,
+          left: "5%",
+          containLabel: true,
+        },
+        tooltip: { trigger: "axis" },
+        legend: {
+          data: charts.names,
+          right: "2%",
+          top: "10%",
+          textStyle: {
+            color: "#fff",
+          },
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false, //取消左侧的间距
+          data: charts.lineX,
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: "#ccc",
+            },
+          },
+        },
+        yAxis: [
+          {
+            type: "value",
+            name: charts.unit,
+            splitLine: {
+              show: true,
+              lineStyle: { type: "dashed", color: "rgba(0,0,0,0.05)" },
+            },
+            nameTextStyle: {
+              fontSize: 14,
+              fontStyle: "normal",
+            },
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: "#ccc",
+              },
+            },
+            axisTick: {
+              show: true,
+            },
+          },
+        ],
+        series: lineY,
+      };
+      middle_echart.setOption(middle_option);
+      myCharts.push(middle_echart);
+      // =========================玫瑰图=========================
+      var mg_echart = echarts.init(document.getElementById("mg_echart"));
+      mg_option = {
+        color: ["#04CB5C", "#6A6969", "#07A9FA", "#FF0E60"],
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)",
+        },
+        grid: {
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          containLabel: true,
+        },
+        legend: {
+          type: "scroll",
+          orient: "vertical",
+          right: "3%",
+          align: "right",
+          top: "middle",
+          textStyle: {
+            color: "#fff",
+          },
+          height: 250,
+        },
+        calculable: true,
+        series: [
+          {
+            name: "垃圾数量占比",
+            type: "pie",
+            radius: [20, 50],
+            roseType: "area",
+            label: {
+              normal: {
+                show: false,
+                position: "outter",
+                formatter: function (parms) {
+                  return parms.data.legendname;
+                },
+              },
+            },
+            data: [
+              { value: 10, name: "厨余垃圾" },
+              { value: 5, name: "其他垃圾" },
+              { value: 15, name: "可回收物" },
+              { value: 12, name: "有害垃圾" },
+            ],
+          },
+        ],
+      };
+      let count = 0;
+      setInterval(() => {
+        mg_echart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 0,
+          dataIndex: count,
+        });
+        count++;
+        if (count === 4) {
+          count = 0;
+        }
+        mg_echart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 0,
+          dataIndex: count,
+        });
+      }, 2000);
+
+      mg_echart.setOption(mg_option);
+      myCharts.push(mg_echart);
+      // =========================行为引导有效率统计=========================
+      var bing_echart = echarts.init(document.getElementById("bing_echart"));
+      var img = "img/guang.png";
+      var m2R2Data = [
+        {
+          value: 335,
+          legendname: "1次",
+          name: "1次行为引导有效人数",
+          itemStyle: { color: "#F25C5D" },
+        },
+        {
+          value: 310,
+          legendname: "2次",
+          name: "2次行为引导有效人数",
+          itemStyle: { color: "#0ECEFF" },
+        },
+        {
+          value: 234,
+          legendname: "3次",
+          name: "3次行为引导有效人数",
+          itemStyle: { color: "#F3961C" },
+        },
+        {
+          value: 154,
+          legendname: "4次",
+          name: "4次行为引导有效人数",
+          itemStyle: { color: "#0566E8" },
+        },
+        {
+          value: 335,
+          legendname: "5次",
+          name: "5次行为引导有效人数",
+          itemStyle: { color: "#907AFF" },
+        },
+      ];
+      bing_option = {
+        graphic: {
+          elements: [
+            {
+              type: "image",
+              z: 1,
+              style: {
+                image: img,
+                width: 220,
+                height: 220,
+              },
+              left: "15.5%",
+              top: "center",
+              position: [500, 500],
+            },
+          ],
+        },
+        title: [
+          // {
+          //   text: "标题",
+          //   textStyle: {
+          //     fontSize: 16,
+          //     color: "black",
+          //   },
+          //   left: "2%",
+          // },
+          {
+            text: "+" + 20 + "%",
+            subtext: "同比上周",
+            textStyle: {
+              fontSize: 20,
+              color: "#FFDB32",
+            },
+            subtextStyle: {
+              fontSize: 13,
+              color: "#fff",
+            },
+            textAlign: "center",
+            x: "34.5%",
+            y: "40%",
+          },
+        ],
+        tooltip: {
+          trigger: "item",
+          formatter: function (parms) {
+            var str =
+              parms.seriesName +
+              "</br>" +
+              parms.marker +
+              "" +
+              parms.data.legendname +
+              "</br>" +
+              "数量：" +
+              parms.data.value +
+              "</br>" +
+              "占比：" +
+              parms.percent +
+              "%";
+            return str;
+          },
+        },
+        legend: {
+          type: "scroll",
+          orient: "vertical",
+          left: "65%",
+          align: "left",
+          top: "middle",
+          textStyle: {
+            color: "#fff",
+          },
+          height: 250,
+        },
+        series: [
+          {
+            name: "行为引导",
+            type: "pie",
+            center: ["35%", "50%"],
+            radius: ["40%", "65%"],
+            clockwise: false, //饼图的扇区是否是顺时针排布
+            avoidLabelOverlap: false,
+            label: {
+              normal: {
+                show: true,
+                position: "outter",
+                formatter: function (parms) {
+                  return parms.data.legendname;
+                },
+              },
+            },
+            labelLine: {
+              normal: {
+                length: 15,
+                length2: 23,
+                smooth: false,
+              },
+            },
+            data: m2R2Data,
+          },
+        ],
+      };
+      bing_echart.setOption(bing_option);
+      myCharts.push(bing_echart);
+      // =========================厨余垃圾投放准确率=========================
+      var shuiwen_echart = echarts.init(
+        document.getElementById("shuiwen_echart")
+      );
+      option_shuiwen = {
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          left: "3%",
+          right: "5%",
+          bottom: "10%",
+          top: "15%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false, //坐标轴两边留白
+          data: ["8/1", "8/5", "8/10", "8/15", "8/20", "8/25", "8/30"],
+          axisLabel: {
+            //坐标轴刻度标签的相关设置。
+            interval: 0, //设置为 1，表示『隔一个标签显示一个标签』
+            //	margin:15,
+            textStyle: {
+              color: "#fff",
+              fontStyle: "normal",
+              fontFamily: "微软雅黑",
+              fontSize: 12,
+            },
+            //rotate:50,
+          },
+          axisTick: {
+            //坐标轴刻度相关设置。
+            show: false,
+          },
+          axisLine: {
+            //坐标轴轴线相关设置
+            lineStyle: {
+              color: "#09181D",
+              // opacity:0.2
+            },
+          },
+          splitLine: {
+            //坐标轴在 grid 区域中的分隔线。
+            show: false,
+            lineStyle: {
+              color: "#E5E9ED",
+              // 	opacity:0.1
+            },
+          },
+        },
+        yAxis: [
+          {
+            type: "value",
+            splitNumber: 3,
+            axisLabel: {
+              formatter: "{value}%",
+              textStyle: {
+                color: "#fff",
+                fontStyle: "normal",
+                fontFamily: "微软雅黑",
+                fontSize: 12,
+              },
+            },
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: "#09181D",
+                // 	opacity:0.1
+              },
+            },
+          },
+        ],
+        series: [
+          {
+            name: "准确率",
+            type: "line",
+            smooth: true, //让曲线变平滑
+            itemStyle: {
+              normal: {
+                color: "#00E3FF",
+                lineStyle: {
+                  color: "#00E3FF",
+                  width: 2,
+                },
+                // areaStyle: {
+                //   color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                //     {
+                //       offset: 0,
+                //       color: "rgba(7,235,206,0)",
+                //     },
+                //     {
+                //       offset: 1,
+                //       color: "rgba(7,235,206,0.3)",
+                //     },
+                //   ]),
+                // },
+              },
+            },
+            data: [1, 2, 3, 3, 5, 6, 5],
+          },
+        ],
+      };
+      shuiwen_echart.setOption(option_shuiwen);
+      myCharts.push(shuiwen_echart);
+      // 批量设置 echarts resize
+      const initEchartsResizeFun = () => {
+        for (let i = 0; i < myCharts.length; i++) {
+          myCharts[i].resize();
+        }
+      };
+      // 批量设置 echarts resize
+      const initEchartsResize = () => {
+        window.addEventListener("resize", initEchartsResizeFun);
+      };
+      initEchartsResize();
+
+      //判断时间是否为个位数，如果时间为个位数就在时间之前补上一个“0”
+      function check(val) {
+        if (val < 10) {
+          return "0" + val;
+        } else {
+          return val;
+        }
+      }
+      function displayTime() {
+        //获取div元素
+        var timeDiv = document.getElementById("timeDiv");
+        var dateDiv = document.getElementById("dateDiv");
+        //获取系统当前的年、月、日、星期、小时、分钟、毫秒
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var a = ["日", "一", "二", "三", "四", "五", "六"];
+        var week = date.getDay();
+        var week_str = "星期" + a[week];
+        var hour = date.getHours();
+        var minutes = date.getMinutes();
+        var second = date.getSeconds();
+        var timestr =
+          check(hour) + "时" + check(minutes) + "分" + check(second) + "秒";
+        var datestr = year + "年" + month + "月" + day + "日";
+        //将系统时间设置到div元素中
+        timeDiv.innerHTML = timestr;
+        dateDiv.innerHTML = datestr;
+      }
+      //每隔1秒调用一次displayTime函数
+      function start() {
+        window.setInterval("displayTime()", 1000); //单位是毫秒
+      }
+      start();
+    </script>
+  </body>
+</html>
