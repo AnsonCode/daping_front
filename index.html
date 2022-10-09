@@ -254,22 +254,22 @@
                   </div>
                   <div class="flex-wrap">
                     <div class="v flex-between">
-                      <p>厨余垃圾数量</p>
+                      <p>厨余垃圾重量</p>
                       <p class="green" id="cylj">0kg</p>
                       <p class="green" id="cylj_zb">39%</p>
                     </div>
                     <div class="v flex-between">
-                      <p>其他垃圾数量</p>
+                      <p>其他垃圾重量</p>
                       <p class="grey" id="qtlj">0g</p>
                       <p class="grey" id="qtlj_zb">39%</p>
                     </div>
                     <div class="v flex-between">
-                      <p>可回收物数量</p>
+                      <p>可回收物重量</p>
                       <p class="blue" id="khslj">0kg</p>
                       <p class="blue" id="khslj_zb">39%</p>
                     </div>
                     <div class="v flex-between">
-                      <p>有害垃圾数量</p>
+                      <p>有害垃圾重量</p>
                       <p class="red" id="yhlj">0kg</p>
                       <p class="red" id="yhlj_zb">39%</p>
                     </div>
@@ -301,7 +301,7 @@
                 <div class="flex-center-center name v">
                   <p>排名</p>
                   <p>小区名称</p>
-                  <p>准确率</p>
+                  <p>准确率%</p>
                   <p>状态</p>
                 </div>
                 <div v-for="it in listData2" class="flex-center-center v">
@@ -719,6 +719,9 @@
             that.changeParent();
           }, 500);
           that.$forceUpdate();
+		  setInterval(() => {
+			this.getChart4(this.value4)
+		  }, 3000);
 
           // })
         },
@@ -884,10 +887,10 @@
             that.$forceUpdate();
           },
           //user
-          async getChart8(cityId, month = 1) {
+          async getChart8(cityId, month = 10) {
             var that = this;
             var result = await post("/api/v1/user", {
-              cityId: 18,
+              cityId: cityId,
               year: 2022,
               month: month,
             });
@@ -938,7 +941,7 @@
               calculable: true,
               series: [
                 {
-                  name: "垃圾数量占比",
+                  name: "垃圾重量占比",
                   type: "pie",
                   radius: [20, 50],
                   roseType: "area",
@@ -1156,6 +1159,11 @@
             option_shuiwen = {
               tooltip: {
                 trigger: "axis",
+				formatter: function (list) {
+					let value=parseFloat(list[0].data)
+                      value = value * 100;
+                      return "准确率："+value + "%";
+                    },
               },
               //   grid: {
               //     left: "3%",
@@ -1252,8 +1260,9 @@
               ],
               series: [
                 {
-                  name: "准确率",
+                  name: "准确率%",
                   type: "line",
+				  
                   smooth: true, //让曲线变平滑
                   itemStyle: {
                     normal: {
