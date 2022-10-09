@@ -373,14 +373,14 @@ header p {
 #btn-select{
 	margin-left: 14px;
 }
-#btn-select button:first-child{
+#btn-select button{
 	padding:0 5px;
 	height: 17px;
 	background: #4E6EDC;
 	border: 1px solid #00E5FF;
 	color: #CDD9FF;
 }
-#btn-select button:last-child{
+#btn-select button.active{
 	padding:0 5px;
 	height: 17px;
 	background: #20289C;

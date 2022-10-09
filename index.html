@@ -44,12 +44,17 @@
                 >
                 </el-option>
               </el-select>
-              <el-select v-model="value3" size="small" placeholder="请选择">
+              <el-select
+                v-model="value3"
+                @change="changeDataGetCity"
+                size="small"
+                placeholder="请选择"
+              >
                 <el-option
                   v-for="item in options3"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id"
                 >
                 </el-option>
               </el-select>
@@ -61,9 +66,9 @@
               >
                 <el-option
                   v-for="item in options4"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id"
                 >
                 </el-option>
               </el-select>
@@ -76,19 +81,19 @@
               </div>
               <div class="flex-wrap user">
                 <div class="v">
-                  <p>123</p>
+                  <p>{{userNum1}}</p>
                   <p>用户总量</p>
                   <p>(户)</p>
                   <img src="img/user01.png" alt="" />
                 </div>
                 <div class="v">
-                  <p>123</p>
+                  <p>{{userNum2}}</p>
                   <p>参与总量</p>
                   <p>(户)</p>
                   <img src="img/user02.png" alt="" />
                 </div>
                 <div class="v">
-                  <p>123</p>
+                  <p>{{userNum3}}</p>
                   <p>新增总量</p>
                   <p>(户)</p>
                   <img src="img/user03.png" alt="" />
@@ -154,12 +159,14 @@
                     >
                     </el-option>
                   </el-select>
-		
-                  <div class="num flex-center-center">5</div>
-                  <div class="num flex-center-center">2</div>
-                  <div class="num flex-center-center">3</div>
-                  <div class="num flex-center-center">1</div>
-                  <div class="num flex-center-center">1</div>
+
+                  <div
+                    style="width: 90%; display: flex; justify-content: center"
+                  >
+                    <div v-for="it in strNum" class="num flex-center-center">
+                      {{it}}
+                    </div>
+                  </div>
                 </div>
                 <div class="dw">kg</div>
               </div>
@@ -171,7 +178,7 @@
                       <count-to
                         class="dh"
                         :start-val="startVal"
-                        :end-val="endVal"
+                        :end-val="endVal1"
                         :duration="2000"
                         separator=""
                       ></count-to>
@@ -186,7 +193,7 @@
                       <count-to
                         class="dh"
                         :start-val="startVal"
-                        :end-val="endVal"
+                        :end-val="endVal2"
                         :duration="2000"
                         separator=""
                       ></count-to>
@@ -201,7 +208,7 @@
                       <count-to
                         class="dh"
                         :start-val="startVal"
-                        :end-val="endVal"
+                        :end-val="endVal3"
                         :duration="2000"
                         separator=""
                       ></count-to>
@@ -216,7 +223,7 @@
                       <count-to
                         class="dh"
                         :start-val="startVal"
-                        :end-val="endVal"
+                        :end-val="endVal4"
                         :duration="2000"
                         separator=""
                       ></count-to>
@@ -242,23 +249,23 @@
                   <div class="flex-wrap">
                     <div class="v flex-between">
                       <p>厨余垃圾数量</p>
-                      <p class="green">4621.56kg</p>
-                      <p class="green">39%</p>
+                      <p class="green" id="cylj">0kg</p>
+                      <p class="green" id="cylj_zb">39%</p>
                     </div>
                     <div class="v flex-between">
                       <p>其他垃圾数量</p>
-                      <p class="grey">4621.56kg</p>
-                      <p class="grey">39%</p>
+                      <p class="grey" id="qtlj">0g</p>
+                      <p class="grey" id="qtlj_zb">39%</p>
                     </div>
                     <div class="v flex-between">
                       <p>可回收物数量</p>
-                      <p class="blue">4621.56kg</p>
-                      <p class="blue">39%</p>
+                      <p class="blue" id="khslj">0kg</p>
+                      <p class="blue" id="khslj_zb">39%</p>
                     </div>
                     <div class="v flex-between">
                       <p>有害垃圾数量</p>
-                      <p class="red">4621.56kg</p>
-                      <p class="red">39%</p>
+                      <p class="red" id="yhlj">0kg</p>
+                      <p class="red" id="yhlj_zb">39%</p>
                     </div>
                   </div>
                 </section>
@@ -291,35 +298,14 @@
                   <p>准确率</p>
                   <p>状态</p>
                 </div>
-                <div class="flex-center-center v">
-                  <p>1</p>
-                  <p class="ellipsis01">工商莲湖分局</p>
-                  <p>100%</p>
-                  <p><img src="img/shang.png" alt="" /></p>
-                </div>
-                <div class="flex-center-center v">
-                  <p>2</p>
-                  <p class="ellipsis01">工商莲湖分局</p>
-                  <p>100%</p>
-                  <p><img src="img/xia.png" alt="" /></p>
-                </div>
-                <div class="flex-center-center v">
-                  <p>3</p>
-                  <p class="ellipsis01">工商莲湖分局</p>
-                  <p>100%</p>
-                  <p><img src="img/shang.png" alt="" /></p>
-                </div>
-                <div class="flex-center-center v">
-                  <p>4</p>
-                  <p class="ellipsis01">工商莲湖分局</p>
-                  <p>100%</p>
-                  <p><img src="img/xia.png" alt="" /></p>
-                </div>
-                <div class="flex-center-center v">
-                  <p>5</p>
-                  <p class="ellipsis01">工商莲湖分局</p>
-                  <p>100%</p>
-                  <p><img src="img/shang.png" alt="" /></p>
+                <div v-for="it in listData2" class="flex-center-center v">
+                  <p>{{it.sort}}</p>
+                  <p class="ellipsis01">{{it.communityName}}</p>
+                  <p>{{it.ratio}}</p>
+                  <p>
+                    <img v-if="it.status == 'up' " src="img/shang.png" alt="" />
+                    <img v-if="it.status == 'down' " src="img/xia.png" alt="" />
+                  </p>
                 </div>
               </div>
             </div>
@@ -357,11 +343,11 @@
                   v-for="(item, index) in listData"
                   :key="index"
                 >
-                  <p class="blue">{{ item.time }}</p>
-                  <p class="green ellipsis01">{{ item.name }}</p>
+                  <p class="blue">{{ item.createdAt }}</p>
+                  <p class="green ellipsis01">{{ item.address }}</p>
                   <p class="blue">{{ item.type }}</p>
-                  <p class="green">{{ item.num }}公斤</p>
-                  <p class="blue">{{ item.from }}</p>
+                  <p class="green">{{ item.DWeight }}公斤</p>
+                  <p class="blue">{{ item.code }}</p>
                 </div>
               </vue-seamless-scroll>
             </div>
@@ -378,13 +364,25 @@
             <div class="flex-center-center">
               <img src="img/line01.png" alt="" />
               <p class="title">数字化引导记录</p>
-			  
+
               <img src="img/line02.png" alt="" />
             </div>
-			<div id="btn-select">
-				<button type="button">疑似混投</button>
-				<button type="button">厨余违规</button>
-			</div>
+            <div id="btn-select">
+              <button
+                type="button"
+                :class="buttonIndex == 0?'active':''"
+                @click="changeChartNum(0)"
+              >
+                疑似混投
+              </button>
+              <button
+                type="button"
+                :class="buttonIndex == 1?'active':''"
+                @click="changeChartNum(1)"
+              >
+                厨余违规
+              </button>
+            </div>
             <!-- <div class="flex-center btn">
               <p>疑似混投</p>
               <p>厨余违规</p>
@@ -410,14 +408,14 @@
               >
                 <div
                   class="flex-center-center v"
-                  v-for="(item, index) in listData"
+                  v-for="(item, index) in listData3"
                   :key="index"
                 >
-                  <p class="blue">{{ item.time }}</p>
-                  <p class="green ellipsis01">{{ item.name }}</p>
-                  <p class="blue">{{ item.type }}</p>
-                  <p class="green">{{ item.num }}</p>
-                  <p class="blue">{{ item.from }}</p>
+                  <p class="blue">{{ item.dateString }}</p>
+                  <p class="green ellipsis01">{{ item.userAddress }}</p>
+                  <p class="blue">{{ item.subject }}</p>
+                  <p class="green">{{ item.behavior }}</p>
+                  <p class="blue">{{ item.measure }}</p>
                 </div>
               </vue-seamless-scroll>
               <!-- <div class="flex-center-center v">
@@ -434,48 +432,68 @@
       <!-- 弹窗 -->
       <div class="mask flex-center-center" v-if="maskShow">
         <div class="big">
-          <el-select v-model="value3" size="small" placeholder="请选择">
+          <el-select
+            v-model="value3"
+            size="small"
+            @change="changeDataGetCity"
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in options3"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
             >
             </el-option>
           </el-select>
-          <el-select v-model="value4" size="small" placeholder="请选择">
+          <el-select
+            v-model="value4"
+            size="small"
+            @change="changeDataGetCity1(4)"
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in options4"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
             >
             </el-option>
           </el-select>
-          <el-select v-model="value3" size="small" placeholder="请选择">
+          <el-select
+            v-model="value5"
+            size="small"
+            @change="changeDataGetCity1(5)"
+            placeholder="请选择"
+          >
             <el-option
-              v-for="item in options3"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in options5"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
             >
             </el-option>
           </el-select>
-          <el-select v-model="value4" size="small" placeholder="请选择">
+          <el-select
+            v-model="value6"
+            size="small"
+            @change="changeDataGetCity1(6)"
+            placeholder="请选择"
+          >
             <el-option
-              v-for="item in options4"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in options6"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
             >
             </el-option>
           </el-select>
-          <el-select v-model="value3" size="small" placeholder="请选择">
+          <el-select v-model="value7" size="small" placeholder="请选择">
             <el-option
-              v-for="item in options3"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in options7"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
             >
             </el-option>
           </el-select>
@@ -484,7 +502,7 @@
       </div>
     </div>
     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
-	<script src="js/index.js"></script>
+    <script src="js/index.js"></script>
     <script type="text/javascript" src="js/echarts.min.js"></script>
     <script type="text/javascript" src="js/vue.js"></script>
     <script type="text/javascript" src="js/vue-count-to.min.js"></script>
@@ -495,9 +513,28 @@
         el: "#app",
         data() {
           return {
+            api: "http://dp.tulingzhihui.com",
+            cityId: 18, //西安市
+            buttonIndex: 0,
+            strNum: [],
             maskShow: false,
             startVal: 0,
-            endVal: 20225,
+            endVal1: 0,
+            endVal2: 0,
+            endVal3: 0,
+            endVal4: 0,
+            endVal0: 0,
+            userNum1: 0,
+            userNum2: 0,
+            userNum3: 0,
+            listData2: [],
+            listData3: [],
+            value7: "",
+            value6: "",
+            value5: "",
+            options7: [],
+            options6: [],
+            options5: [],
             options1: [
               {
                 value: "1",
@@ -510,6 +547,50 @@
                 value: "1",
                 label: "1月",
               },
+              {
+                value: "2",
+                label: "2月",
+              },
+              {
+                value: "3",
+                label: "3月",
+              },
+              {
+                value: "4",
+                label: "4月",
+              },
+              {
+                value: "5",
+                label: "5月",
+              },
+              {
+                value: "6",
+                label: "6月",
+              },
+              {
+                value: "7",
+                label: "7月",
+              },
+              {
+                value: "8",
+                label: "8月",
+              },
+              {
+                value: "9",
+                label: "9月",
+              },
+              {
+                value: "10",
+                label: "10月",
+              },
+              {
+                value: "11",
+                label: "11月",
+              },
+              {
+                value: "12",
+                label: "12月",
+              },
             ],
             value2: "1月",
             options3: [
@@ -518,88 +599,852 @@
                 label: "西安市",
               },
             ],
-            value3: "西安市",
+            value3: "",
             options4: [
               {
                 value: "1",
                 label: "莲湖区",
               },
             ],
-            value4: "莲湖区",
-            listData: [
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-              {
-                time: "2022-8-9 16:30:43",
-                name: "工商莲湖分局",
-                type: "其他垃圾",
-                num: "0.2公斤",
-                from: "0001-00083",
-              },
-            ],
+            value4: "",
+            listData: [],
           };
+        },
+        created() {
+          //alert(11);
+          var that = this;
+          //  this.$nextTick(()=>{
+          // console.log("=========",$.ajax.post)
+          $.ajax({
+            url: this.api + "/api/v1/city",
+            type: "post",
+            dataType: "json",
+            data: JSON.stringify({
+              parentId: 0,
+              cityId: 0,
+            }),
+            contentType: "application/json;charset=utf-8",
+            success: function (res) {
+              console.log(res);
+              if (res.code == 200) {
+                that.options3 = res.result;
+                that.options4 = [];
+                that.value3 = that.options3[0].id;
+                var parentid = that.options3[0].id;
+                $.ajax({
+                  url: that.api + "/api/v1/city",
+                  type: "post",
+                  dataType: "json",
+                  data: JSON.stringify({
+                    parentId: parentid,
+                    cityId: 0,
+                  }),
+                  contentType: "application/json;charset=utf-8",
+                  success: function (res) {
+                    console.log(res);
+                    //alert(that);
+                    if (res.code == 200) {
+                      that.options4 = res.result;
+                      that.value4 = that.options4[0].id;
+                      // alert( that.value4);
+                      //that.value4 = that.options4[0].id;
+                      setTimeout(function () {
+                        that.changeParent();
+                      }, 500);
+                    }
+                  },
+                });
+                that.$forceUpdate();
+              }
+            },
+          });
+          // })
+        },
+        methods: {
+          changeChartNum(val) {
+            this.buttonIndex = val;
+            this.getChart7(this.value4, val);
+          },
+          changeDataGetCity1(num) {
+            var that = this;
+            //alert( that["value"+ (num - 1)] );
+            $.ajax({
+              url: that.api + "/api/v1/city",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                parentId: 0,
+                cityId: that["value" + (num - 1)],
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                //alert(that);
+                if (res.code == 200) {
+                  that["options" + num] = res.result;
+                  if (that["options" + num].length == 0) return;
+                  console.log("", that["options" + num]);
+                  that["value" + num] = that["options" + num][0].id;
+                  if (num == 6) return;
+                  alert(num);
+                  that.changeDataGetCity1(num + 1);
+                  if (num > 4) {
+                    return;
+                  }
+                  setTimeout(function () {
+                    that.changeParent();
+                  }, 500);
+                }
+              },
+            });
+          },
+          changeDataGetCity() {
+            var that = this;
+            alert(this.value3);
+            $.ajax({
+              url: that.api + "/api/v1/city",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                parentId: this.value3,
+                cityId: 0,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                //alert(that);
+                if (res.code == 200) {
+                  that.options4 = res.result;
+                  that.value4 = that.options4[0].id;
+                  that.changeDataGetCity1(4);
+                  setTimeout(function () {
+                    that.changeParent();
+                  }, 500);
+                }
+              },
+            });
+          },
+          changeParent() {
+            // this.value4 = 18;
+            // alert(this.value4);
+            this.getChart1(this.value4);
+            this.getChart2(this.value4, 1);
+            this.getChart3(this.value4, 1);
+            this.getChart4(this.value4);
+            this.getChart5(this.value4);
+            this.getChart6(this.value4);
+            this.getChart7(this.value4); //没有数据
+            this.getChart8(this.value4, 1);
+          },
+          getChart1(cityId) {
+            var that = this;
+            $.ajax({
+              url: this.api + "/api/v1/order/bgs",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                cityId: 18,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                  that.createChart1(res.result);
+                  that.$forceUpdate();
+                }
+              },
+            });
+          },
+          getChart2(cityId, month) {
+            var that = this;
+            $.ajax({
+              url: this.api + "/api/v1/order/countStation",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                cityId: cityId,
+                year: 2022,
+                month: month,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                  that.createChart2(res.result);
+                  that.$forceUpdate();
+                }
+              },
+            });
+          },
+          //kitchenRatio
+          getChart3(cityId, month) {
+            var that = this;
+            $.ajax({
+              url: this.api + "/api/v1/order/kitchenRatio",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                cityId: cityId,
+                year: 2022,
+                month: month,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                  that.createChart3(res.result);
+                  that.$forceUpdate();
+                }
+              },
+            });
+          },
+          //last5
+          getChart4(cityId) {
+            var that = this;
+            $.ajax({
+              url: this.api + "/api/v1/order/last5",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                cityId: cityId,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                  that.createChart4(res.result);
+                  that.$forceUpdate();
+                }
+              },
+            });
+          },
+          //厨余垃圾投放准确率
+          getChart5(cityId) {
+            var that = this;
+            $.ajax({
+              url: this.api + "/api/v1/order/ranking",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                cityId: cityId,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                  that.listData2 = res.result;
+                  that.$forceUpdate();
+                }
+              },
+            });
+          },
+          //rubbishStation
+          getChart6(cityId) {
+            var that = this;
+            $.ajax({
+              url: this.api + "/api/v1/order/rubbishStation",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                cityId: cityId,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                  that.createChart6(res.result);
+                  that.$forceUpdate();
+                }
+              },
+            });
+          },
+          //violation
+          getChart7(cityId, type = 0) {
+            var that = this;
+            $.ajax({
+              url: this.api + "/api/v1/order/violation",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                cityId: cityId,
+                type: type,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                  //   that.createChart6(res.result);
+                  that.listData3 = res.result;
+                  that.$forceUpdate();
+                }
+              },
+            });
+          },
+          //user
+          getChart8(cityId, month = 1) {
+            var that = this;
+            $.ajax({
+              url: this.api + "/api/v1/user",
+              type: "post",
+              dataType: "json",
+              data: JSON.stringify({
+                cityId: 18,
+                year: 2022,
+                month: month,
+              }),
+              contentType: "application/json;charset=utf-8",
+              success: function (res) {
+                console.log(res);
+                if (res.code == 200) {
+                  //   that.createChart6(res.result);
+                  that.userNum1 = res.result.user_total; //
+                  that.userNum2 = res.result.participation_count; //
+                  that.userNum3 = res.result.insert_count; //
+
+                  that.$forceUpdate();
+                }
+              },
+            });
+          },
+          createChart6(data) {
+            $("#cylj").text(data.kitchenCount + "kg");
+            $("#qtlj").text(data.otherCount + "kg");
+            $("#khslj").text(data.recycleCount + "kg");
+            $("#yhlj").text(data.hazardousCount + "kg");
+
+            $("#cylj_zb").text(data.kitchenRatio + "%");
+            $("#qtlj_zb").text(data.otherRatio + "%");
+            $("#khslj_zb").text(data.recycleRatio + "%");
+            $("#yhlj_zb").text(data.hazardousRatio + "%");
+            var mg_echart = echarts.init(document.getElementById("mg_echart"));
+            mg_option = {
+              color: ["#04CB5C", "#6A6969", "#07A9FA", "#FF0E60"],
+              tooltip: {
+                trigger: "item",
+                formatter: "{a} <br/>{b} : {c} ({d}%)",
+              },
+              grid: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                containLabel: true,
+              },
+              legend: {
+                type: "scroll",
+                orient: "vertical",
+                right: "3%",
+                align: "right",
+                top: "middle",
+                textStyle: {
+                  color: "#fff",
+                },
+                height: 250,
+              },
+              calculable: true,
+              series: [
+                {
+                  name: "垃圾数量占比",
+                  type: "pie",
+                  radius: [20, 50],
+                  roseType: "area",
+                  label: {
+                    normal: {
+                      show: false,
+                      position: "outter",
+                      formatter: function (parms) {
+                        return parms.data.legendname;
+                      },
+                    },
+                  },
+                  data: [
+                    {
+                      value: data.kitchenCount,
+                      name: "厨余垃圾",
+                    },
+                    {
+                      value: data.otherCount,
+                      name: "其他垃圾",
+                    },
+                    {
+                      value: data.recycleCount,
+                      name: "可回收物",
+                    },
+                    {
+                      value: data.hazardousCount,
+                      name: "有害垃圾",
+                    },
+                  ],
+                },
+              ],
+            };
+            let count = 0;
+            setInterval(() => {
+              mg_echart.dispatchAction({
+                type: "downplay",
+                seriesIndex: 0,
+                dataIndex: count,
+              });
+              count++;
+              if (count === 4) {
+                count = 0;
+              }
+              mg_echart.dispatchAction({
+                type: "highlight",
+                seriesIndex: 0,
+                dataIndex: count,
+              });
+            }, 2000);
+
+            mg_echart.setOption(mg_option);
+            //业务数据统计
+            var lineXs = []; //日期
+            // var values = [
+            // 	[],
+            // 	[],
+            // 	[],
+            // 	[]
+            // ];
+            // data.hazardousWeightList.forEach((it) => {
+            // 	values[0].push(Number(it.weight));
+
+            // })
+            // data.kitchenWeightList.forEach((it) => {
+            // 	values[1].push(Number(it.weight));
+            // })
+            // data.recycleWeightList.forEach((it) => {
+            // 	values[2].push(Number(it.weight));
+            // })
+            // data.otherWeightList.forEach((it) => {
+            // 	values[3].push(Number(it.weight));
+            // })
+            var middle_echart = echarts.init(
+              document.getElementById("middle_echart")
+            );
+
+            for (let i = 0; i < data.hazardousWeightList.length; i++) {
+              lineXs.push(data.hazardousWeightList[i].dateString);
+            }
+            let yhlj = [];
+            let cylj = [];
+            let khslj = [];
+            let qtlj = [];
+            data.hazardousWeightList.forEach((it) => {
+              yhlj.push(Number(it.weight));
+            });
+            data.kitchenWeightList.forEach((it) => {
+              cylj.push(Number(it.weight));
+            });
+            data.recycleWeightList.forEach((it) => {
+              khslj.push(Number(it.weight));
+            });
+            data.otherWeightList.forEach((it) => {
+              qtlj.push(Number(it.weight));
+            });
+            const charts = {
+              title: "",
+              unit: "单位:kg",
+              names: ["有害垃圾", "厨余垃圾", "可回收物", "其他垃圾"],
+              lineX: lineXs,
+              // value: values,
+              value: [yhlj, cylj, khslj, qtlj],
+            };
+            const color = ["#CD2F65", "#04CB5C", "#25A1E5", "#C7C7C7"];
+            const lineY = [];
+            for (var i = 0; i < charts.names.length; i++) {
+              const x = i;
+              const data = {
+                name: charts.names[i],
+                type: "line",
+                color: color[x],
+                smooth: true, //曲线或者折线
+                symbol: "circle",
+                symbolSize: 6,
+                data: charts.value[i],
+                areaStyle: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    {
+                      offset: 0,
+                      color: color[x] + "b3",
+                    },
+                    {
+                      offset: 1,
+                      color: color[x] + "03",
+                    },
+                  ]),
+                },
+              };
+              lineY.push(data);
+            }
+            console.log(lineY);
+            const middle_option = {
+              backgroundColor: "",
+              title: {
+                text: charts.title,
+                x: "left",
+                textStyle: {
+                  fontSize: "15",
+                  color: "#303133",
+                },
+              },
+              grid: {
+                top: "30%",
+                right: "5%",
+                bottom: 0,
+                left: "5%",
+                containLabel: true,
+              },
+              tooltip: { trigger: "axis" },
+              legend: {
+                data: charts.names,
+                right: "2%",
+                top: "10%",
+                textStyle: {
+                  color: "#fff",
+                },
+              },
+              xAxis: {
+                type: "category",
+                boundaryGap: false, //取消左侧的间距
+                data: charts.lineX,
+                axisLine: {
+                  show: true,
+                  lineStyle: {
+                    color: "#ccc",
+                  },
+                },
+              },
+              yAxis: [
+                {
+                  type: "value",
+                  name: charts.unit,
+                  splitLine: {
+                    show: true,
+                    lineStyle: {
+                      type: "dashed",
+                      color: "rgba(0,0,0,0.05)",
+                    },
+                  },
+                  nameTextStyle: {
+                    fontSize: 14,
+                    fontStyle: "normal",
+                  },
+                  axisLine: {
+                    show: true,
+                    lineStyle: {
+                      color: "#ccc",
+                    },
+                  },
+                  axisTick: {
+                    show: true,
+                  },
+                },
+              ],
+              series: lineY,
+            };
+            middle_echart.setOption(middle_option);
+            // myCharts.push(middle_echart);
+          },
+          createChart4(data) {
+            //实时投放记录
+            this.listData = data;
+          },
+          createChart3(data) {
+            var dates = [];
+            var vals = [];
+            data.forEach((it) => {
+              dates.push(it.dateString);
+              vals.push(it.ratio);
+            });
+            var shuiwen_echart = echarts.init(
+              document.getElementById("shuiwen_echart")
+            );
+            option_shuiwen = {
+              tooltip: {
+                trigger: "axis",
+              },
+              grid: {
+                left: "3%",
+                right: "5%",
+                bottom: "10%",
+                top: "15%",
+                containLabel: true,
+              },
+              xAxis: {
+                type: "category",
+                boundaryGap: false, //坐标轴两边留白
+                data: dates,
+                axisLabel: {
+                  //坐标轴刻度标签的相关设置。
+                  interval: 0, //设置为 1，表示『隔一个标签显示一个标签』
+                  //	margin:15,
+                  textStyle: {
+                    color: "#fff",
+                    fontStyle: "normal",
+                    fontFamily: "微软雅黑",
+                    fontSize: 12,
+                  },
+                  //rotate:50,
+                },
+                axisTick: {
+                  //坐标轴刻度相关设置。
+                  show: false,
+                },
+                axisLabel: {
+                  //坐标轴刻度标签的相关设置。
+                  clickable: true, //并给图表添加单击事件  根据返回值判断点击的是哪里
+                  interval: 0,
+                  rotate: "45",
+                  formatter: function (params, index) {
+                    params = params.substring(
+                      params.indexOf("-") + 1,
+                      params.length
+                    );
+                    if (index % 2 != 0) {
+                      return params;
+                    } else {
+                      return params;
+                    }
+                  },
+                },
+                axisLine: {
+                  //坐标轴轴线相关设置
+                  lineStyle: {
+                    color: "#09181D",
+                    // opacity:0.2
+                  },
+                },
+                splitLine: {
+                  //坐标轴在 grid 区域中的分隔线。
+                  show: false,
+                  lineStyle: {
+                    color: "#E5E9ED",
+                    // 	opacity:0.1
+                  },
+                },
+              },
+              yAxis: [
+                {
+                  type: "value",
+                  splitNumber: 3,
+                  axisLabel: {
+                    formatter: "{value}%",
+                    textStyle: {
+                      color: "#fff",
+                      fontStyle: "normal",
+                      fontFamily: "微软雅黑",
+                      fontSize: 12,
+                    },
+                  },
+                  axisLine: {
+                    show: false,
+                  },
+                  axisTick: {
+                    show: false,
+                  },
+                  splitLine: {
+                    show: true,
+                    lineStyle: {
+                      color: "#09181D",
+                      // 	opacity:0.1
+                    },
+                  },
+                },
+              ],
+              series: [
+                {
+                  name: "准确率",
+                  type: "line",
+                  smooth: true, //让曲线变平滑
+                  itemStyle: {
+                    normal: {
+                      color: "#00E3FF",
+                      lineStyle: {
+                        color: "#00E3FF",
+                        width: 2,
+                      },
+                      // areaStyle: {
+                      //   color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                      //     {
+                      //       offset: 0,
+                      //       color: "rgba(7,235,206,0)",
+                      //     },
+                      //     {
+                      //       offset: 1,
+                      //       color: "rgba(7,235,206,0.3)",
+                      //     },
+                      //   ]),
+                      // },
+                    },
+                  },
+                  data: vals,
+                },
+              ],
+            };
+            shuiwen_echart.setOption(option_shuiwen);
+          },
+          createChart2(data) {
+            //中间数据
+            this.endVal4 = data.aiTotal;
+            this.endVal3 = data.putTotal;
+            this.endVal2 = data.stationTotal;
+            this.endVal1 = data.communityTotal;
+            this.strNum = (data.recycleTotal + "").split("");
+            // this.strNum = [4,6,0,9,8]
+            console.log(this.strNum);
+          },
+          createChart1(data) {
+            //行为引导有效率统计
+            var bing_echart = echarts.init(
+              document.getElementById("bing_echart")
+            );
+            console.log(data);
+            var img = "img/guang.png";
+            var m2R2Data = [
+              {
+                value: data.oneBootNum,
+                legendname: "1次",
+                name: "1次行为引导有效人数",
+                itemStyle: {
+                  color: "#F25C5D",
+                },
+              },
+              {
+                value: data.twiceBootNum,
+                legendname: "2次",
+                name: "2次行为引导有效人数",
+                itemStyle: {
+                  color: "#0ECEFF",
+                },
+              },
+              {
+                value: data.threeBootNum,
+                legendname: "3次",
+                name: "3次行为引导有效人数",
+                itemStyle: {
+                  color: "#F3961C",
+                },
+              },
+              {
+                value: data.fourBootNum,
+                legendname: "4次",
+                name: "4次行为引导有效人数",
+                itemStyle: {
+                  color: "#0566E8",
+                },
+              },
+              {
+                value: data.fiveBootNum,
+                legendname: "5次",
+                name: "5次行为引导有效人数",
+                itemStyle: {
+                  color: "#907AFF",
+                },
+              },
+            ];
+            bing_option = {
+              graphic: {
+                elements: [
+                  {
+                    type: "image",
+                    z: 1,
+                    style: {
+                      image: img,
+                      width: 220,
+                      height: 220,
+                    },
+                    left: "15.5%",
+                    top: "center",
+                    position: [500, 500],
+                  },
+                ],
+              },
+              title: [
+                // {
+                //   text: "标题",
+                //   textStyle: {
+                //     fontSize: 16,
+                //     color: "black",
+                //   },
+                //   left: "2%",
+                // },
+                {
+                  text: "+" + data.lastWeekRatio + "%",
+                  subtext: "同比上周",
+                  textStyle: {
+                    fontSize: 20,
+                    color: "#FFDB32",
+                  },
+                  subtextStyle: {
+                    fontSize: 13,
+                    color: "#fff",
+                  },
+                  textAlign: "center",
+                  x: "34.5%",
+                  y: "40%",
+                },
+              ],
+              tooltip: {
+                trigger: "item",
+                formatter: function (parms) {
+                  var str =
+                    parms.seriesName +
+                    "</br>" +
+                    parms.marker +
+                    "" +
+                    parms.data.legendname +
+                    "</br>" +
+                    "数量：" +
+                    parms.data.value +
+                    "</br>" +
+                    "占比：" +
+                    parms.percent +
+                    "%";
+                  return str;
+                },
+              },
+              legend: {
+                type: "scroll",
+                orient: "vertical",
+                left: "65%",
+                align: "left",
+                top: "middle",
+                textStyle: {
+                  color: "#fff",
+                },
+                height: 250,
+              },
+              series: [
+                {
+                  name: "行为引导",
+                  type: "pie",
+                  center: ["35%", "50%"],
+                  radius: ["40%", "65%"],
+                  clockwise: false, //饼图的扇区是否是顺时针排布
+                  avoidLabelOverlap: false,
+                  label: {
+                    normal: {
+                      show: true,
+                      position: "outter",
+                      formatter: function (parms) {
+                        return parms.data.legendname;
+                      },
+                    },
+                  },
+                  labelLine: {
+                    normal: {
+                      length: 15,
+                      length2: 23,
+                      smooth: false,
+                    },
+                  },
+                  data: m2R2Data,
+                },
+              ],
+            };
+            bing_echart.setOption(bing_option);
+            bing_echart.resize();
+          },
         },
         computed: {
           seamlessScrollOption() {
@@ -616,6 +1461,8 @@
           },
         },
       });
+
+      /*
       var myCharts = [];
       // =========================业务数据统计=========================
       var middle_echart = echarts.init(
@@ -787,6 +1634,10 @@
       mg_echart.setOption(mg_option);
       myCharts.push(mg_echart);
       // =========================行为引导有效率统计=========================
+      // $.ajax.post(this.api,{
+
+      // })
+
       var bing_echart = echarts.init(document.getElementById("bing_echart"));
       var img = "img/guang.png";
       var m2R2Data = [
@@ -808,7 +1659,7 @@
           name: "3次行为引导有效人数",
           itemStyle: { color: "#F3961C" },
         },
-        {
+        { 
           value: 154,
           legendname: "4次",
           name: "4次行为引导有效人数",
@@ -1081,6 +1932,8 @@
         window.setInterval("displayTime()", 1000); //单位是毫秒
       }
       start();
+	  
+	  */
     </script>
   </body>
 </html>
