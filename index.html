@@ -698,158 +698,85 @@
             that.createChart1(result);
             that.$forceUpdate();
           },
-          getChart2(cityId, month) {
+          async getChart2(cityId, month) {
             var that = this;
-            $.ajax({
-              url: this.api + "/api/v1/order/countStation",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                cityId: cityId,
-                year: 2022,
-                month: month,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                if (res.code == 200) {
-                  that.createChart2(res.result);
-                  that.$forceUpdate();
-                }
-              },
+            var result = await post("/api/v1/order/countStation", {
+              cityId: cityId,
+              year: 2022,
+              month: month,
             });
+            that.createChart2(result);
+            that.$forceUpdate();
           },
           //kitchenRatio
-          getChart3(cityId, month) {
+          async getChart3(cityId, month) {
             var that = this;
-            $.ajax({
-              url: this.api + "/api/v1/order/kitchenRatio",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                cityId: cityId,
-                year: 2022,
-                month: month,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                if (res.code == 200) {
-                  that.createChart3(res.result);
-                  that.$forceUpdate();
-                }
-              },
+
+            var result = await post("/api/v1/order/kitchenRatio", {
+              cityId: cityId,
+              year: 2022,
+              month: month,
             });
+
+            that.createChart3(result);
+            that.$forceUpdate();
           },
           //last5
-          getChart4(cityId) {
+          async getChart4(cityId) {
             var that = this;
-            $.ajax({
-              url: this.api + "/api/v1/order/last5",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                cityId: cityId,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                if (res.code == 200) {
-                  that.createChart4(res.result);
-                  that.$forceUpdate();
-                }
-              },
+            var result = await post("/api/v1/order/last5", {
+              cityId: cityId,
             });
+
+            that.createChart4(result);
+            that.$forceUpdate();
           },
           //厨余垃圾投放准确率
-          getChart5(cityId) {
+          async getChart5(cityId) {
             var that = this;
-            $.ajax({
-              url: this.api + "/api/v1/order/ranking",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                cityId: cityId,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                if (res.code == 200) {
-                  that.listData2 = res.result;
-                  that.$forceUpdate();
-                }
-              },
+            var result = await post("/api/v1/order/ranking", {
+              cityId: cityId,
             });
+            that.listData2 = result;
+            that.$forceUpdate();
           },
           //rubbishStation
-          getChart6(cityId) {
+          async getChart6(cityId) {
             var that = this;
-            $.ajax({
-              url: this.api + "/api/v1/order/rubbishStation",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                cityId: cityId,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                if (res.code == 200) {
-                  that.createChart6(res.result);
-                  that.$forceUpdate();
-                }
-              },
+            var result = await post("/api/v1/order/rubbishStation", {
+              cityId: cityId,
             });
+            that.createChart6(result);
+            that.$forceUpdate();
           },
           //violation
-          getChart7(cityId, type = 0) {
+          async getChart7(cityId, type = 0) {
             var that = this;
-            $.ajax({
-              url: this.api + "/api/v1/order/violation",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                cityId: cityId,
-                type: type,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                if (res.code == 200) {
-                  //   that.createChart6(res.result);
-                  that.listData3 = res.result;
-                  that.$forceUpdate();
-                }
-              },
+            var result = await post("/api/v1/order/violation", {
+              cityId: cityId,
+              type: type,
             });
+            that.listData3 = result;
+            that.$forceUpdate();
           },
           //user
-          getChart8(cityId, month = 1) {
+          async getChart8(cityId, month = 1) {
             var that = this;
-            $.ajax({
-              url: this.api + "/api/v1/user",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                cityId: 18,
-                year: 2022,
-                month: month,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                if (res.code == 200) {
-                  //   that.createChart6(res.result);
-                  that.userNum1 = res.result.user_total; //
-                  that.userNum2 = res.result.participation_count; //
-                  that.userNum3 = res.result.insert_count; //
-
-                  that.$forceUpdate();
-                }
-              },
+            var result = await post("/api/v1/user", {
+              cityId: 18,
+              year: 2022,
+              month: month,
             });
+            //   that.createChart6(res.result);
+            that.userNum1 = result.user_total; //
+            that.userNum2 = result.participation_count; //
+            that.userNum3 = result.insert_count; //
+
+            that.$forceUpdate();
           },
-          createChart6(data) {
+          async createChart6(data) {
+            //
+            console.log("anson=>>", data);
             $("#cylj").text(data.kitchenCount + "kg");
             $("#qtlj").text(data.otherCount + "kg");
             $("#khslj").text(data.recycleCount + "kg");
