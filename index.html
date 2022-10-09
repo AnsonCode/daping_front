@@ -667,28 +667,16 @@
           async changeDataGetCity() {
             var that = this;
             // alert(this.value3);
-            $.ajax({
-              url: that.api + "/api/v1/city",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                parentId: this.value3,
-                cityId: 0,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                //alert(that);
-                if (res.code == 200) {
-                  that.options4 = res.result;
-                  that.value4 = that.options4[0].id;
-                  that.changeDataGetCity1(4);
-                  setTimeout(function () {
-                    that.changeParent();
-                  }, 500);
-                }
-              },
+            var result = await post("/api/v1/city", {
+              parentId: this.value3,
+              cityId: 0,
             });
+            that.options4 = result;
+            that.value4 = that.options4[0].id;
+            that.changeDataGetCity1(4);
+            setTimeout(function () {
+              that.changeParent();
+            }, 500);
           },
           changeParent() {
             // this.value4 = 18;
@@ -702,24 +690,13 @@
             this.getChart7(this.value4); //没有数据
             this.getChart8(this.value4, 1);
           },
-          getChart1(cityId) {
+          async getChart1(cityId) {
             var that = this;
-            $.ajax({
-              url: this.api + "/api/v1/order/bgs",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                cityId: 18,
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                if (res.code == 200) {
-                  that.createChart1(res.result);
-                  that.$forceUpdate();
-                }
-              },
+            var result = await post("/api/v1/order/bgs", {
+              cityId: 18,
             });
+            that.createChart1(result);
+            that.$forceUpdate();
           },
           getChart2(cityId, month) {
             var that = this;
