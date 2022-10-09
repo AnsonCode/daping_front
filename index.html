@@ -330,7 +330,7 @@
                 <p>时间</p>
                 <p>点位</p>
                 <p>垃圾类型</p>
-                <p>重量/数量</p>
+                <p>重量</p>
                 <p>数据来源</p>
               </div>
               <vue-seamless-scroll
@@ -1159,11 +1159,11 @@
             option_shuiwen = {
               tooltip: {
                 trigger: "axis",
-				formatter: function (list) {
-					let value=parseFloat(list[0].data)
-                      value = value * 100;
-                      return "准确率："+value + "%";
-                    },
+				// formatter: function (list) {
+				// 	let value=parseFloat(list[0].data)
+                //       value = value * 100;
+                //       return "准确率："+value + "%";
+                //     },
               },
               //   grid: {
               //     left: "3%",
@@ -1260,7 +1260,7 @@
               ],
               series: [
                 {
-                  name: "准确率%",
+                  name: "准确率",
                   type: "line",
 				  
                   smooth: true, //让曲线变平滑
