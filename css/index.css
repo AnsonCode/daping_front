@@ -327,6 +327,7 @@ header p {
 }
 
 .mask .big {
+  width: 800px;
   height: 192px;
   background: url(../img/mask.png) center no-repeat;
   background-size: 100% 100%;

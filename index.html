@@ -49,7 +49,7 @@
                 >
                 </el-option>
               </el-select>
-              <el-select
+              <!-- <el-select
                 v-model="value3"
                 @change="changeDataGetCity"
                 size="small"
@@ -62,19 +62,26 @@
                   :value="item.id"
                 >
                 </el-option>
-              </el-select>
+              </el-select> -->
+			   <!-- <el-cascader
+			v-model="currentSel"
+            :props="props"
+            @change="handleCityChange"
+            @expand-change="handleCityChange"
+			 @focus="maskShow=true"
+          ></el-cascader> -->
               <el-select
-                v-model="value4"
+                v-model="name4"
                 size="small"
                 placeholder="请选择"
                 @focus="maskShow=true"
               >
-                <el-option
+                <!-- <el-option
                   v-for="item in options4"
                   :key="item.id"
                   :label="item.name"
                   :value="item.id"
-                >
+                > -->
                 </el-option>
               </el-select>
             </div>
@@ -530,14 +537,11 @@
             >
             </el-option>
           </el-select> -->
-
-          <!-- <el-cascader
-            :props="props"
-            @change="handleCityChange"
-            @expand-change="handleCityChange"
-          ></el-cascader> -->
-
+===
+         
+{{currentSel}}
           <el-cascader-panel
+		  ref="cascader"
             :props="props"
             @change="handleCityChange"
             @expand-change="handleCityChange"
@@ -554,7 +558,7 @@
     <script type="text/javascript" src="js/vue-seamless-scroll.js"></script>
     <script src="js/element.js"></script>
     <script>
-      let id = 0;
+      let gnodes=[]
       var app = new Vue({
         el: "#app",
         data() {
@@ -581,8 +585,9 @@
                     leaf: level >= 3,
                   };
                 });
-
                 resolve(nodes);
+				// 去重
+				gnodes.push(...nodes)
               },
             },
             // api: "http://dp.tulingzhihui.com",
@@ -678,8 +683,10 @@
                 label: "莲湖区",
               },
             ],
-            value4: "",
+            value4: 18, // 
+			name4:"西安",
             listData: [],
+			currentSel:[]
           };
         },
         async created() {
@@ -687,25 +694,25 @@
           var that = this;
           //  this.$nextTick(()=>{
           // console.log("=========",$.ajax.post)
-          var result = await post("/api/v1/city", {
-            parentId: 0,
-            cityId: 0,
-          });
+        //   var result = await post("/api/v1/city", {
+        //     parentId: 0,
+        //     cityId: 0,
+        //   });
 
-          console.log("anson1", result);
-          that.options3 = result;
-          that.options4 = [];
-          that.value3 = that.options3[0].id;
-          var parentid = that.options3[0].id;
+        //   console.log("anson1", result);
+        //   that.options3 = result;
+        //   that.options4 = [];
+        //   that.value3 = that.options3[0].id;
+        //   var parentid = that.options3[0].id;
 
-          var result2 = await post("/api/v1/city", {
-            parentId: parentid,
-            cityId: 0,
-          });
-          console.log("anson2", result2);
+        //   var result2 = await post("/api/v1/city", {
+        //     parentId: parentid,
+        //     cityId: 0,
+        //   });
+        //   console.log("anson2", result2);
 
-          that.options4 = result2;
-          that.value4 = that.options4[0].id;
+        //   that.options4 = result2;
+        //   that.value4 = that.options4[0].id;
           // alert( that.value4);
           //that.value4 = that.options4[0].id;
           setTimeout(function () {
@@ -721,16 +728,30 @@
             console.log("changeChartNum=>", val);
             this.getChart7(this.value4, val);
           },
-          handleCityChange(sel) {
-            console.log("=====>", sel);
+          async handleCityChange(sel,node) {
+			this.currentSel=sel
+            console.log("=====>", sel,node);
             if (sel.length > 0) {
               var last = sel[sel.length - 1];
+
               this.value4 = last;
+			 var node= gnodes.find(item=>{
+				return item.value==last
+			  })
+			  this.name4=node.label
+
+			//    var result = await post("/api/v1/city", {
+			// 		// parentId: last,
+			// 		cityId: last,
+			// 	});
+			// 	console.log(result)
+			// 	// this.name4=res
             }
           },
           handleConfrim() {
             this.maskShow = false;
             this.changeParent();
+			gnodes=[]
           },
 
           handleMonthChange(val) {
