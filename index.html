@@ -150,14 +150,8 @@
             <div style="height: 31%; display: flex; flex-direction: column">
               <div class="flex-between" style="align-items: flex-end">
                 <div class="flex-between" style="width: 90%">
-                  <el-select v-model="value1" size="small" placeholder="请选择">
-                    <el-option
-                      v-for="item in options1"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    >
-                    </el-option>
+                  <el-select size="small" placeholder="请选择">
+                    <el-option label="回收总量" selected> </el-option>
                   </el-select>
 
                   <div
@@ -538,10 +532,10 @@
             options1: [
               {
                 value: "1",
-                label: "回收总量",
+                label: "2022",
               },
             ],
-            value1: "回收总量",
+            value1: "2022",
             options2: [
               {
                 value: "1",
@@ -610,54 +604,37 @@
             listData: [],
           };
         },
-        created() {
+        async created() {
           //alert(11);
           var that = this;
           //  this.$nextTick(()=>{
           // console.log("=========",$.ajax.post)
-          $.ajax({
-            url: this.api + "/api/v1/city",
-            type: "post",
-            dataType: "json",
-            data: JSON.stringify({
-              parentId: 0,
-              cityId: 0,
-            }),
-            contentType: "application/json;charset=utf-8",
-            success: function (res) {
-              console.log(res);
-              if (res.code == 200) {
-                that.options3 = res.result;
-                that.options4 = [];
-                that.value3 = that.options3[0].id;
-                var parentid = that.options3[0].id;
-                $.ajax({
-                  url: that.api + "/api/v1/city",
-                  type: "post",
-                  dataType: "json",
-                  data: JSON.stringify({
-                    parentId: parentid,
-                    cityId: 0,
-                  }),
-                  contentType: "application/json;charset=utf-8",
-                  success: function (res) {
-                    console.log(res);
-                    //alert(that);
-                    if (res.code == 200) {
-                      that.options4 = res.result;
-                      that.value4 = that.options4[0].id;
-                      // alert( that.value4);
-                      //that.value4 = that.options4[0].id;
-                      setTimeout(function () {
-                        that.changeParent();
-                      }, 500);
-                    }
-                  },
-                });
-                that.$forceUpdate();
-              }
-            },
+          var result = await post("/api/v1/city", {
+            parentId: 0,
+            cityId: 0,
           });
+
+          console.log("anson1", result);
+          that.options3 = result;
+          that.options4 = [];
+          that.value3 = that.options3[0].id;
+          var parentid = that.options3[0].id;
+
+          var result2 = await post("/api/v1/city", {
+            parentId: parentid,
+            cityId: 0,
+          });
+          console.log("anson2", result2);
+
+          that.options4 = result2;
+          that.value4 = that.options4[0].id;
+          // alert( that.value4);
+          //that.value4 = that.options4[0].id;
+          setTimeout(function () {
+            that.changeParent();
+          }, 500);
+          that.$forceUpdate();
+
           // })
         },
         methods: {
@@ -665,42 +642,31 @@
             this.buttonIndex = val;
             this.getChart7(this.value4, val);
           },
-          changeDataGetCity1(num) {
+          async changeDataGetCity1(num) {
             var that = this;
             //alert( that["value"+ (num - 1)] );
-            $.ajax({
-              url: that.api + "/api/v1/city",
-              type: "post",
-              dataType: "json",
-              data: JSON.stringify({
-                parentId: 0,
-                cityId: that["value" + (num - 1)],
-              }),
-              contentType: "application/json;charset=utf-8",
-              success: function (res) {
-                console.log(res);
-                //alert(that);
-                if (res.code == 200) {
-                  that["options" + num] = res.result;
-                  if (that["options" + num].length == 0) return;
-                  console.log("", that["options" + num]);
-                  that["value" + num] = that["options" + num][0].id;
-                  if (num == 6) return;
-                  alert(num);
-                  that.changeDataGetCity1(num + 1);
-                  if (num > 4) {
-                    return;
-                  }
-                  setTimeout(function () {
-                    that.changeParent();
-                  }, 500);
-                }
-              },
+            var result = await post("/api/v1/city", {
+              parentId: 0,
+              cityId: that["value" + (num - 1)],
             });
+
+            that["options" + num] = result;
+            if (that["options" + num].length == 0) return;
+            console.log("", that["options" + num]);
+            that["value" + num] = that["options" + num][0].id;
+            if (num == 6) return;
+            //   alert(num);
+            that.changeDataGetCity1(num + 1);
+            if (num > 4) {
+              return;
+            }
+            setTimeout(function () {
+              that.changeParent();
+            }, 500);
           },
-          changeDataGetCity() {
+          async changeDataGetCity() {
             var that = this;
-            alert(this.value3);
+            // alert(this.value3);
             $.ajax({
               url: that.api + "/api/v1/city",
               type: "post",
