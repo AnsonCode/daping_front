@@ -70,20 +70,15 @@
             @expand-change="handleCityChange"
 			 @focus="maskShow=true"
           ></el-cascader> -->
-              <el-select
-                v-model="name4"
-                size="small"
-                placeholder="请选择"
-                @focus="maskShow=true"
-              >
-                <!-- <el-option
-                  v-for="item in options4"
-                  :key="item.id"
-                  :label="item.name"
-                  :value="item.id"
-                > -->
-                </el-option>
-              </el-select>
+             <el-select v-model="value8" size="small" placeholder="请选择" @focus="openMask">
+             				<!-- <el-option
+               v-for="item in options4"
+               :key="item.id"
+               :label="item.name"
+               :value="item.id"
+             > -->
+             				</el-option>
+             			</el-select>
             </div>
             <div class="item item02">
               <div class="flex-center-center">
@@ -239,48 +234,48 @@
                 </div>
               </div>
             </div>
-            <div class="middle">
-              <div class="flex-center-center">
-                <img src="img/line01.png" alt="" />
-                <p class="title">业务数据统计</p>
-                <img src="img/line02.png" alt="" />
-              </div>
-              <div id="middle_echart" style="width: 100%; height: 50%"></div>
-              <div class="flex-between" style="width: 100%; height: 50%">
-                <section class="zb" style="width: 60%">
-                  <div class="flex-center" style="margin-bottom: 10px">
-                    <p class="l"></p>
-                    <p class="txt">垃圾数量占比</p>
-                  </div>
-                  <div class="flex-wrap">
-                    <div class="v flex-between">
-                      <p>厨余垃圾重量</p>
-                      <p class="green" id="cylj">0kg</p>
-                      <p class="green" id="cylj_zb">39%</p>
-                    </div>
-                    <div class="v flex-between">
-                      <p>其他垃圾重量</p>
-                      <p class="grey" id="qtlj">0g</p>
-                      <p class="grey" id="qtlj_zb">39%</p>
-                    </div>
-                    <div class="v flex-between">
-                      <p>可回收物重量</p>
-                      <p class="blue" id="khslj">0kg</p>
-                      <p class="blue" id="khslj_zb">39%</p>
-                    </div>
-                    <div class="v flex-between">
-                      <p>有害垃圾重量</p>
-                      <p class="red" id="yhlj">0kg</p>
-                      <p class="red" id="yhlj_zb">39%</p>
-                    </div>
-                  </div>
-                </section>
-                <section
-                  id="mg_echart"
-                  style="width: 40%; height: 100%; top: -20px; left: -50px"
-                ></section>
-              </div>
-            </div>
+           <div class="middle">
+             <div class="flex-center-center">
+               <img src="img/line01.png" alt="" />
+               <p class="title">业务数据统计</p>
+               <img src="img/line02.png" alt="" />
+             </div>
+             <div id="middle_echart" style="width: 100%; height: 50%"></div>
+             <div class="flex-between" style="width: 100%; height: 50%">
+               <section class="zb" style="width: 100%">
+                 <div class="flex-center" style="margin-bottom: 10px">
+                   <p class="l"></p>
+                   <p class="txt">垃圾数量占比</p>
+                 </div>
+                 <div class="flex-wrap">
+                   <div class="v flex-between">
+                     <p>厨余垃圾重量</p>
+                     <p class="green" id="cylj">0kg</p>
+                     <p class="green" id="cylj_zb">39%</p>
+                   </div>
+                   <div class="v flex-between">
+                     <p>其他垃圾重量</p>
+                     <p class="grey" id="qtlj">0g</p>
+                     <p class="grey" id="qtlj_zb">39%</p>
+                   </div>
+                   <div class="v flex-between">
+                     <p>可回收物重量</p>
+                     <p class="blue" id="khslj">0kg</p>
+                     <p class="blue" id="khslj_zb">39%</p>
+                   </div>
+                   <div class="v flex-between">
+                     <p>有害垃圾重量</p>
+                     <p class="red" id="yhlj">0kg</p>
+                     <p class="red" id="yhlj_zb">39%</p>
+                   </div>
+                 </div>
+               </section>
+               <!-- <section
+                 id="mg_echart"
+                 style="width: 40%; height: 100%; top: -20px; left: -50px"
+               ></section> -->
+             </div>
+           </div>
           </section>
           <section class="right">
             <div class="item item01">
@@ -328,7 +323,7 @@
             <div class="table">
               <div class="flex-center-center name v">
                 <p>时间</p>
-                <p>点位</p>
+                <p>单位名称</p>
                 <p>垃圾类型</p>
                 <p>重量</p>
                 <p>数据来源</p>
@@ -337,7 +332,7 @@
                 :data="listData"
                 :class-option="seamlessScrollOption"
                 style="
-                  height: 200px;
+                  height: 185px;
                   overflow: hidden;
                   color: white;
                   font-size: 18px;
@@ -364,7 +359,7 @@
               <p class="title">厨余垃圾投放准确率</p>
               <img src="img/line02.png" alt="" />
             </div>
-            <div id="shuiwen_echart" style="width: 100%; height: 87%"></div>
+            <div id="shuiwen_echart" style="width: 100%; height: 100%"></div>
           </section>
           <section class="right">
             <div class="flex-center-center">
@@ -405,7 +400,7 @@
                 :data="listData"
                 :class-option="seamlessScrollOption"
                 style="
-                  height: 200px;
+                  height: 180px;
                   overflow: hidden;
                   color: white;
                   font-size: 18px;
@@ -469,9 +464,34 @@
         </div>
       </div>
       <!-- 弹窗 -->
-      <div class="mask flex-center-center" v-if="maskShow">
+	  <div class="mask flex-center-center" v-if="maskShow">
+	  	<div class="big">
+	  		<el-select v-model="value3" size="small" @change="changeDataGetCity" placeholder="请选择"
+	  			ref="selectLabel">
+	  			<el-option v-for="item in options3" :key="item.id" :label="item.name" :value="item.id">
+	  			</el-option>
+	  		</el-select>
+	  		<el-select v-model="value4" size="small" placeholder="请选择" ref="selectLabel2" @change="changeDataGetCity8">
+	  			<el-option v-for="item in options4" :key="item.id" :label="item.name" :value="item.id"
+	  				@click.native.prevent="changeDataGetCity1(4,item.id)">
+	  			</el-option>
+	  		</el-select>
+	  		<el-select v-model="value5" size="small" ref="selectLabel3" placeholder="请选择">
+	  			<el-option v-for="item in options5" :key="item.id" :label="item.name" :value="item.id"
+	  				@click.native.prevent="changeDataGetCity1(5,item.id)">
+	  			</el-option>
+	  		</el-select>
+	  		<el-select v-model="value6" size="small" ref="selectLabel4" placeholder="请选择">
+	  			<el-option v-for="item in options6" :key="item.id" :label="item.name" :value="item.id"
+	  				@click.native.prevent="changeDataGetCity1(6,item.id)">
+	  			</el-option>
+	  		</el-select>
+	  		<div class="submit" @click="submit">确认</div>
+	  	</div>
+	  </div>
+      <!--<div class="mask flex-center-center" v-if="maskShow">
         <div class="big">
-          <!-- <el-select
+           <el-select
             v-model="value3"
             size="small"
             @change="changeDataGetCity"
@@ -536,7 +556,7 @@
               :value="item.id"
             >
             </el-option>
-          </el-select> -->
+          </el-select>
 ===
          
 {{currentSel}}
@@ -547,8 +567,8 @@
             @expand-change="handleCityChange"
           ></el-cascader-panel>
           <div class="submit" @click="handleConfrim">确认</div>
-        </div>
-      </div>
+        </div> 
+      </div>-->
     </div>
     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
     <script src="js/index.js"></script>
@@ -562,132 +582,128 @@
       var app = new Vue({
         el: "#app",
         data() {
-          return {
-            props: {
-              lazy: true,
-              async lazyLoad(node, resolve) {
-                console.log(node);
-                const { level } = node;
-                var parentId = 0;
-                if (level != 0) {
-                  //
-                  parentId = node.value;
-                }
-                var result = await post("/api/v1/city", {
-                  parentId: parentId,
-                  cityId: 0,
-                });
-                console.log(result);
-                let nodes = result.map((item) => {
-                  return {
-                    value: item.id,
-                    label: item.name,
-                    leaf: level >= 3,
-                  };
-                });
-                resolve(nodes);
-				// 去重
-				gnodes.push(...nodes)
-              },
-            },
-            // api: "http://dp.tulingzhihui.com",
-            // cityId: 18, //西安市
-            buttonIndex: 0,
-            strNum: [],
-            maskShow: false,
-            startVal: 0,
-            endVal1: 0,
-            endVal2: 0,
-            endVal3: 0,
-            endVal4: 0,
-            endVal0: 0,
-            userNum1: 0,
-            userNum2: 0,
-            userNum3: 0,
-            listData2: [],
-            listData3: [],
-            value7: "",
-            value6: "",
-            value5: "",
-            options7: [],
-            options6: [],
-            options5: [],
-            options1: [
-              {
-                value: 2022,
-                label: "2022",
-              },
-            ],
-            value1: 2022,
-            options2: [
-              {
-                value: 1,
-                label: "1月",
-              },
-              {
-                value: 2,
-                label: "2月",
-              },
-              {
-                value: 3,
-                label: "3月",
-              },
-              {
-                value: 4,
-                label: "4月",
-              },
-              {
-                value: 5,
-                label: "5月",
-              },
-              {
-                value: 6,
-                label: "6月",
-              },
-              {
-                value: 7,
-                label: "7月",
-              },
-              {
-                value: 8,
-                label: "8月",
-              },
-              {
-                value: 9,
-                label: "9月",
-              },
-              {
-                value: 10,
-                label: "10月",
-              },
-              //   {
-              //     value: "11",
-              //     label: "11月",
-              //   },
-              //   {
-              //     value: "12",
-              //     label: "12月",
-              //   },
-            ],
-            value2: 10,
-            options3: [
-              {
-                value: "1",
-                label: "西安市",
-              },
-            ],
-            value3: "", // 省份
-            options4: [
-              {
-                value: "1",
-                label: "莲湖区",
-              },
-            ],
-            value4: 18, // 
-			name4:"西安",
-            listData: [],
-			currentSel:[]
-          };
+        	return {
+        		props: {
+        			lazy: true,
+        			async lazyLoad(node, resolve) {
+        				console.log(node);
+        				const {
+        					level
+        				} = node;
+        				var parentId = 0;
+        				if (level != 0) {
+        					//
+        					parentId = node.value;
+        				}
+        				var result = await post("/api/v1/city", {
+        					parentId: parentId,
+        					cityId: 0,
+        				});
+        				console.log(result);
+        				let nodes = result.map((item) => {
+        					return {
+        						value: item.id,
+        						label: item.name,
+        						leaf: level >= 3,
+        					};
+        				});
+        				resolve(nodes);
+        				// 去重
+        				gnodes.push(...nodes)
+        			},
+        		},
+        		// api: "http://dp.tulingzhihui.com",
+        		// cityId: 18, //西安市
+        		buttonIndex: 0,
+        		strNum: [],
+        		maskShow: false,
+        		startVal: 0,
+        		endVal1: 0,
+        		endVal2: 0,
+        		endVal3: 0,
+        		endVal4: 0,
+        		endVal0: 0,
+        		userNum1: 0,
+        		userNum2: 0,
+        		userNum3: 0,
+        		listData2: [],
+        		listData3: [],
+        		value7: "",
+        		value6: "",
+        		value5: "",
+        		options7: [],
+        		options6: [],
+        		options5: [],
+        		options1: [{
+        			value: 2022,
+        			label: "2022",
+        		}, ],
+        		value1: 2022,
+        		options2: [{
+        				value: 1,
+        				label: "1月",
+        			},
+        			{
+        				value: 2,
+        				label: "2月",
+        			},
+        			{
+        				value: 3,
+        				label: "3月",
+        			},
+        			{
+        				value: 4,
+        				label: "4月",
+        			},
+        			{
+        				value: 5,
+        				label: "5月",
+        			},
+        			{
+        				value: 6,
+        				label: "6月",
+        			},
+        			{
+        				value: 7,
+        				label: "7月",
+        			},
+        			{
+        				value: 8,
+        				label: "8月",
+        			},
+        			{
+        				value: 9,
+        				label: "9月",
+        			},
+        			{
+        				value: 10,
+        				label: "10月",
+        			},
+        			//   {
+        			//     value: "11",
+        			//     label: "11月",
+        			//   },
+        			//   {
+        			//     value: "12",
+        			//     label: "12月",
+        			//   },
+        		],
+        		value2: 10,
+        		options3: [{
+        			value: "1",
+        			label: "西安市",
+        		}, ],
+        		value3: "", // 省份
+        		options4: [{
+        			value: "1",
+        			label: "莲湖区",
+        		}, ],
+        		value4: '', // 
+        		value8: "西安",
+        		listData: [],
+        		currentSel: [],
+        		cityIdx:18, //市id
+        	};
         },
         async created() {
           //alert(11);
@@ -719,9 +735,9 @@
             that.changeParent();
           }, 500);
           that.$forceUpdate();
-		  setInterval(() => {
-			this.getChart4(this.value4)
-		  }, 3000);
+		 //  setInterval(() => {
+			// this.getChart4(this.value4)
+		 //  }, 3000);
 
           // })
         },
@@ -767,55 +783,169 @@
             }, 500);
           },
 
-          async changeDataGetCity1(num) {
-            console.log("----点击", num);
-            var that = this;
-            //alert( that["value"+ (num - 1)] );
-            var result = await post("/api/v1/city", {
-              parentId: that["value" + (num - 1)],
-              cityId: 0,
-            });
-
-            that["options" + num] = result;
-            if (that["options" + num].length == 0) return;
-            console.log("", that["options" + num]);
-            that["value" + num] = that["options" + num][0].id;
-            if (num == 6) return;
-            //   alert(num);
-            that.changeDataGetCity1(num + 1);
-            if (num > 4) {
-              return;
-            }
-            setTimeout(function () {
-              that.changeParent();
-            }, 500);
+          async openMask(){
+          	var that =this;
+          	that.maskShow = true
+          	var result = await post("/api/v1/city", {
+          		parentId: 0,
+          		cityId: 0,
+          	});
+          	that.options3 = result;
+          	// that.options4 = [];
+          	// var parentid = that.options3[0].id;
+          	// that.cityIdx = '';
+          	// var result2 = await post("/api/v1/city", {
+          	// 	parentId: parentid,
+          	// 	cityId: 0,
+          	// });
+          	// console.log("anson2", result2);
+          	// that.options4 = result2;
+          	// that.cityIdx = that.options4[0].id;
+          },
+          
+          async submit() {
+          	var that = this;
+          	that.maskShow = false
+			console.log(this.$refs.selectLabel.selected.label);
+			console.log(this.$refs.selectLabel2.selected.label);
+			console.log(this.$refs.selectLabel3.selected.label);
+			console.log(this.$refs.selectLabel4.selected.label);
+          	if (that.$refs.selectLabel3.selected.label == undefined && that.$refs.selectLabel4.selected
+          		.label == undefined) {
+          		that.value8 = that.$refs.selectLabel2.selected.label
+          	}
+			if (that.$refs.selectLabel2.selected.label == undefined &&that.$refs.selectLabel3.selected.label == undefined && that.$refs.selectLabel4.selected
+				.label == undefined) {
+				that.value8 = that.$refs.selectLabel.selected.label
+			}
+          
+          	if (that.$refs.selectLabel3.selected.label != undefined) {
+          		that.value8 = that.$refs.selectLabel3.selected.label
+          	}
+          	if (that.$refs.selectLabel4.selected.label != undefined) {
+          		that.value8 = that.$refs.selectLabel4.selected.label
+          	}
+          	setTimeout(function() {
+          		that.changeParent();
+          	}, 500);
+          },
+		  async changeDataGetCity8(){
+			  console.log('----点击123')
+		  },
+          
+          async changeDataGetCity1(num, id) {
+          	console.log('----点击', num)
+          	var that = this;
+          	//alert( that["value"+ (num - 1)] );
+          	var result = await post("/api/v1/city", {
+          		parentId: that["value" + (num - 1)],
+          		cityId: 0,
+          	});
+          
+          	that["options" + num] = result;
+          	if (that["options" + num].length == 0) return;
+          	console.log("", that["options" + num]);
+          	that["value" + num] = id;
+				that.cityIdx= id;
+          	// if (num == 6) return;
+          	//   alert(num);
+          	//that.changeDataGetCity1(num + 1);
+          	// if (num > 4) {
+          	//   return;
+          	// }
+          	if (num == 4) {
+          		console.log('====id', id)
+          		var result1 = await post("/api/v1/city", {
+          			parentId: id,
+          			cityId: 0,
+          		});
+          		console.log('====result1', result1)
+          		that.options5 = result1;
+          		that.options6 = [];
+          		that.options7 = []
+          		//this.value3 = this.$refs.selectLabel2.selected.label
+          		// if (result1.length > 0) {
+          		// 	that.value5 = result1[0].id;
+          		// }
+          
+          		// console.log("result1===",result1)
+          		// console.log('===lable',this.$refs.selectLabel2.selected.label);
+          		// that["options4"] = result;
+          	}
+          	if (num == 5) {
+          		var result2 = await post("/api/v1/city", {
+          			parentId: id,
+          			cityId: 0,
+          		});
+          		that.options6 = result2;
+          		that.options7 = []
+          		//this.value3 = this.$refs.selectLabel3.selected.label
+          // 		if (result2.length > 0) {
+          // 			that.value6 = result2[0].id;
+          // 		}
+          
+          		// console.log("result1===",result1)
+          		// console.log('===lable',this.$refs.selectLabel3.selected.label);
+          		// that["options4"] = result;
+          	}
+          	if (num == 6) {
+          		console.log('====', id)
+          		var result3 = await post("/api/v1/city", {
+          			parentId: id,
+          			cityId: 0,
+          		});
+          		that.options7 = result3
+          		// console.log(result3)
+          		// that.value7 = result3[0].id;
+          		//this.value3 = this.$refs.selectLabel4.selected.label
+          		// console.log("result1===",result1)
+          		// console.log('===lable',this.$refs.selectLabel4.selected.label);
+          		// that["options4"] = result;
+          	}
+          	// setTimeout(function () {
+          	//   that.changeParent();
+          	// }, 500);
           },
           async changeDataGetCity() {
-            var that = this;
-            // alert(this.value3);
-            var result = await post("/api/v1/city", {
-              parentId: this.value3,
-              cityId: 0,
-            });
-            that.options4 = result;
-            that.value4 = that.options4[0].id;
-            // that.changeDataGetCity1(4);
-            setTimeout(function () {
-              that.changeParent();
-            }, 500);
+          	var that = this;
+          	console.log('===lable', this.$refs.selectLabel.selected.label);
+          	var result = await post("/api/v1/city", {
+          		parentId: this.value3,
+          		cityId: 0,
+          	});
+		
+          	that.options4 = result;
+			that.cityIdx= this.value3;
+          	that.value4 = '';
+          	that.options5 = [];
+          	that.value5 = "";
+          	that.options6 = [];
+          	that.value6 = "";
+          	that.options7 = [];
+          	that.value7 = "";
+          	// that.changeDataGetCity1(4);
+          	console.log('that.value4-----', that.options4[0].id)
+          
           },
-
           changeParent() {
-            // this.value4 = 18;
-            // alert(this.value4);
-            this.getChart1(this.value4);
-            this.getChart2(this.value4, this.value2);
-            this.getChart3(this.value4, this.value2);
-            this.getChart4(this.value4);
-            this.getChart5(this.value4);
-            this.getChart6(this.value4);
-            this.getChart7(this.value4); //没有数据
-            this.getChart8(this.value4, this.value2);
+          	// this.value4 = 18;
+          	// alert(this.value4);
+          	this.getChart1(this.cityIdx);
+          	this.getChart2(this.cityIdx, this.value2);
+          	this.getChart3(this.cityIdx, this.value2);
+          	this.getChart4(this.cityIdx);
+          	this.getChart5(this.cityIdx);
+          	this.getChart6(this.cityIdx);
+          	this.getChart7(this.cityIdx); //没有数据
+          	this.getChart8(this.cityIdx, this.value2);
+          	// this.getChart1(this.value4);
+          	// this.getChart2(this.value4, this.value2);
+          	// this.getChart3(this.value4, this.value2);
+          	// this.getChart4(this.value4);
+          	// this.getChart5(this.value4);
+          	// this.getChart6(this.value4);
+          	// this.getChart7(this.value4); //没有数据
+          	// this.getChart8(this.value4, this.value2);
           },
           async getChart1(cityId) {
             var that = this;
@@ -913,87 +1043,6 @@
             $("#qtlj_zb").text(data.otherRatio + "%");
             $("#khslj_zb").text(data.recycleRatio + "%");
             $("#yhlj_zb").text(data.hazardousRatio + "%");
-            var mg_echart = echarts.init(document.getElementById("mg_echart"));
-            mg_option = {
-              color: ["#04CB5C", "#6A6969", "#07A9FA", "#FF0E60"],
-              tooltip: {
-                trigger: "item",
-                formatter: "{a} <br/>{b} : {c} ({d}%)",
-              },
-              grid: {
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                containLabel: true,
-              },
-              legend: {
-                type: "scroll",
-                orient: "vertical",
-                right: "3%",
-                align: "right",
-                top: "middle",
-                textStyle: {
-                  color: "#fff",
-                },
-                height: 250,
-              },
-              calculable: true,
-              series: [
-                {
-                  name: "垃圾重量占比",
-                  type: "pie",
-                  radius: [20, 50],
-                  roseType: "area",
-                  label: {
-                    normal: {
-                      show: false,
-                      position: "outter",
-                      formatter: function (parms) {
-                        return parms.data.legendname;
-                      },
-                    },
-                  },
-                  data: [
-                    {
-                      value: data.kitchenCount,
-                      name: "厨余垃圾",
-                    },
-                    {
-                      value: data.otherCount,
-                      name: "其他垃圾",
-                    },
-                    {
-                      value: data.recycleCount,
-                      name: "可回收物",
-                    },
-                    {
-                      value: data.hazardousCount,
-                      name: "有害垃圾",
-                    },
-                  ],
-                },
-              ],
-            };
-            let count = 0;
-            setInterval(() => {
-              mg_echart.dispatchAction({
-                type: "downplay",
-                seriesIndex: 0,
-                dataIndex: count,
-              });
-              count++;
-              if (count === 4) {
-                count = 0;
-              }
-              mg_echart.dispatchAction({
-                type: "highlight",
-                seriesIndex: 0,
-                dataIndex: count,
-              });
-            }, 2000);
-
-            mg_echart.setOption(mg_option);
             //业务数据统计
             var lineXs = []; //日期
             // var values = [
@@ -1165,6 +1214,7 @@
                 //       return "准确率："+value + "%";
                 //     },
               },
+			  
                 grid: {
                   left: "3%",
                   right: "5%",
@@ -1230,7 +1280,7 @@
                   type: "value",
                   min: 0,
                   max: 1,
-                  //   splitNumber: 1,
+                    splitNumber: 5,
                   axisLabel: {
                     formatter: function (value) {
                       value = value * 100;
