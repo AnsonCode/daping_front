@@ -645,6 +645,7 @@
 						currentSel: [],
 						cityIdx: 18, //市id
 						isCommunity: false, //是否选择到小区
+						currentId:'',//当前id
 					};
 				},
 				async created() {
@@ -765,30 +766,36 @@
 						console.log(this.$refs.selectLabel3.selected.label);
 						console.log(this.$refs.selectLabel4.selected.label);
 						console.log(this.$refs.selectLabel5.selected.label);
+						console.log('-----',this.$refs.selectLabel.selected.id)
 						if (that.$refs.selectLabel3.selected.label == undefined && that.$refs.selectLabel4.selected
 							.label == undefined) {
 							that.value8 = that.$refs.selectLabel2.selected.label;
+							that.cityIdx = that.value4;
 							that.isCommunity = false;
 						}
 						if (that.$refs.selectLabel2.selected.label == undefined && that.$refs.selectLabel3.selected
 							.label == undefined && that.$refs.selectLabel4.selected
 							.label == undefined) {
 							that.value8 = that.$refs.selectLabel.selected.label;
+								that.cityIdx = that.value3;
 							that.isCommunity = false;
 						}
 
 						if (that.$refs.selectLabel3.selected.label != undefined) {
-							that.value8 = that.$refs.selectLabel3.selected.label
+							that.value8 = that.$refs.selectLabel3.selected.label;
+								that.cityIdx = that.value5;
 						}
 						if (that.$refs.selectLabel4.selected.label != undefined) {
 							that.value8 = that.$refs.selectLabel4.selected.label
+								that.cityIdx = that.value6;
 							that.isCommunity = false;
 						}
 						if (that.$refs.selectLabel5.selected.label != undefined) {
 							that.value8 = that.$refs.selectLabel5.selected.label
+								that.cityIdx = that.value7;
 							that.isCommunity = true;
-							console.log(that.value8)
 						}
+							console.log('currentId----',that.cityIdx)
 						setTimeout(function() {
 							that.changeParent();
 						}, 500);

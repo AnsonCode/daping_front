@@ -371,6 +371,7 @@ header p {
 .el-popper[x-placement^="bottom"] .popper__arrow,
 .el-popper[x-placement^="bottom"] .popper__arrow::after {
   border-bottom-color: #424242 !important;
+  display: none;
 }
 #btn-select{
 	margin-left: 14px;
